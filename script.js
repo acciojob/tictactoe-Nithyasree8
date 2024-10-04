@@ -17,15 +17,16 @@ document.getElementById('submit').addEventListener('click', () => {
 
 document.querySelectorAll('.cell').forEach((cell) => {
     cell.addEventListener('click', () => {
-        if (gameStarted && board[(link unavailable) - 1] === '') {
+        const cellIndex = parseInt((link unavailable)) - 1;
+        if (gameStarted && board[cellIndex] === '') {
             if (currentPlayer === 1) {
                 cell.innerText = 'X';
-                board[(link unavailable) - 1] = 'X';
+                board[cellIndex] = 'X';
                 currentPlayer = 2;
                 document.querySelector('.message').innerText = `${player2Name}, you're up`;
             } else {
                 cell.innerText = 'O';
-                board[(link unavailable) - 1] = 'O';
+                board[cellIndex] = 'O';
                 currentPlayer = 1;
                 document.querySelector('.message').innerText = `${player1Name}, you're up`;
             }
@@ -47,4 +48,11 @@ function checkWinner() {
     ];
 
     for (let i = 0; i < winningCombinations.length; i++) {
-        const [a, b,
+        const [a, b, c] = winningCombinations[i];
+        if (board[a] === board[b] && board[b] === board[c] && board[a] !== '') {
+            document.querySelector('.message').innerText = `${currentPlayer === 1 ? player1Name : player2Name} congratulations, you won!`;
+            gameStarted = false;
+        }
+    }
+}
+
